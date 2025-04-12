@@ -79,3 +79,23 @@ WHERE name LIKE '%Kingdom%';
 
 SELECT COUNT(*)
 FROM city;
+
+## 🟡 Intermediate Level (10 Questions)
+
+### 11. List countries that border exactly 5 other countries.
+
+SELECT c.name
+FROM borders AS b
+JOIN country AS c
+ON b.country1 = c.code
+GROUP BY b.country1, c.name
+HAVING COUNT(b.country1) = 5
+ORDER BY c.name ASC;
+
+### 12. Which continent has the most countries?
+
+SELECT continent, COUNT(continent)
+FROM encompasses
+GROUP BY continent
+ORDER BY continent ASC
+LIMIT 1;
