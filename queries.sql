@@ -99,3 +99,76 @@ FROM encompasses
 GROUP BY continent
 ORDER BY continent ASC
 LIMIT 1;
+
+### 13. Show all religions that are dominant in at least 5 countries.
+
+SELECT name, COUNT(name)
+FROM religion
+WHERE percentage > 50
+GROUP BY name
+HAVING COUNT(name) >= 5
+ORDER BY count DESC;
+
+### 14. Find countries with more than one official language.
+
+SELECT country.name, COUNT(spoken.country)
+FROM spoken
+JOIN country
+ON spoken.country = country.code
+GROUP BY spoken.country, country.name
+HAVING COUNT(spoken.country) > 1
+ORDER BY count DESC;
+
+### 15. Show all countries with a GDP per capita over $30,000.
+
+SELECT country.name, economy.gdp, (gdp * 1000000) / country.population AS per_capita
+FROM economy
+JOIN country
+ON economy.country = country.code
+WHERE (gdp * 1000000) / country.population > 30000
+ORDER BY (gdp * 1000000) / country.population DESC;
+
+### 16. List lakes larger than 10,000 sq km.
+
+SELECT name, area
+FROM lake
+WHERE area > 10000
+ORDER BY area DESC;
+
+### 17. Find the longest river and all the countries it passes through.
+
+SELECT DISTINCT country.name
+FROM geo_river
+JOIN country
+ON geo_river.country = country.code
+WHERE geo_river.river = (
+  SELECT name
+  FROM river
+  WHERE length != 0
+  ORDER BY length DESC
+  LIMIT 1
+);
+
+### 18. Find the country with the largest population density.
+
+SELECT name, (population / area)
+FROM country
+ORDER BY (population / area) DESC;
+
+### 19. List all countries where Islam is the dominant religion and population exceeds 100 million.
+
+SELECT country.name, religion.percentage, country.population
+FROM religion
+JOIN country
+ON religion.country = country.code
+WHERE religion.percentage > 50 AND religion.name = 'Muslim' AND country.population > 100000000
+ORDER BY religion.percentage DESC;
+
+### 20. Show countries that gained independence after 1950.
+
+SELECT country.name, politics.independence
+FROM politics
+JOIN country
+ON politics.country = country.code
+WHERE politics.independence > '01-01-1950'
+ORDER BY politics.independence DESC;
