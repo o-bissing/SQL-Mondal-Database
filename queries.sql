@@ -172,3 +172,54 @@ JOIN country
 ON politics.country = country.code
 WHERE politics.independence > '01-01-1950'
 ORDER BY politics.independence DESC;
+
+## 🔴 Advanced Level (10 Questions)
+
+### 21. Find all countries that share a border with at least 3 countries and have a coastline.
+
+SELECT country.name
+FROM borders
+JOIN country
+ON borders.country1 = country.code
+GROUP BY country.name, borders.country1
+HAVING (COUNT(borders.country1)) >= 3 AND (borders.country1 IN (
+  SELECT country
+  FROM geo_sea
+  GROUP BY country))
+ORDER BY country.name;
+
+### 22. Which language is spoken by the most people (across all countries)?
+
+SELECT spoken.language, ((country.population / 100) * spoken.percentage) AS people_count
+FROM spoken
+JOIN country
+ON spoken.country = country.code
+GROUP BY spoken.language, people_count
+HAVING ((country.population / 100) * spoken.percentage) IS NOT NULL
+ORDER BY people_count DESC
+LIMIT 1;
+
+### 23. Find all landlocked countries in Asia with population > 10 million.
+
+SELECT country.name, sea, continent
+FROM country
+LEFT JOIN geo_sea
+ON country.code = geo_sea.country
+LEFT JOIN encompasses
+ON country.code = encompasses.country
+WHERE population > 10000000
+GROUP BY country.name, sea, continent
+HAVING sea IS NULL AND continent = 'Asia'
+
+### 24. List the capitals of countries where the population of the capital is more than half the population of the country.
+
+SELECT citypops.city, country.name, citypops.year, citypops.population 
+  AS city_population, country.population AS country_population 
+FROM citypops
+LEFT JOIN country
+ON citypops.country = country.code
+WHERE citypops.city = country.capital
+  AND (citypops.population > (country.population / 2))
+
+### 25. Show country pairs that share a border and both have "Republic" in their name.
+
