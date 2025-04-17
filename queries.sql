@@ -223,3 +223,26 @@ WHERE citypops.city = country.capital
 
 ### 25. Show country pairs that share a border and both have "Republic" in their name.
 
+SELECT c1.name, c2.name, borders.length FROM borders
+JOIN country AS c1
+ON borders.country1 = c1.code
+JOIN country AS c2
+ON borders.country2 = c2.code
+WHERE country1 IN (
+  SELECT code 
+  FROM country
+  WHERE name LIKE '%Republic' OR name LIKE '%Rep%'
+) AND country2 IN (
+  SELECT code 
+  FROM country
+  WHERE name LIKE '%Republic' OR name LIKE '%Rep%'
+)
+
+### 26. Which river flows through the most countries?
+
+SELECT river, COUNT(DISTINCT country) FROM geo_river
+GROUP BY river
+ORDER BY count DESC
+
+### 27. Show the average area of countries by continent, sorted descending.
+
