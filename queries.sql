@@ -246,3 +246,12 @@ ORDER BY count DESC
 
 ### 27. Show the average area of countries by continent, sorted descending.
 
+SELECT encompasses.continent, SUM(country.area) 
+FROM encompasses
+JOIN country
+ON encompasses.country = country.code
+GROUP BY encompasses.continent
+ORDER BY SUM(country.area) DESC
+
+### 28. Find all cities that are capitals and also the largest city in their country.
+
