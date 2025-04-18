@@ -63,4 +63,4 @@ note = "Available from
 | sea               | name, area, depth                                                                                   |
 | spoken            | country, language, percentage                                                                       |
 
-![Power BI Report Preview](https://github.com/o-bissing/SQL-Mondial-Database/blob/main/report.pdf)
+![Power BI Report Preview](https://github.com/o-bissing/SQL-Mondial-Database/blob/main/report.png)
