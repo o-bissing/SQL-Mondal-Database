@@ -209,7 +209,7 @@ LEFT JOIN encompasses
 ON country.code = encompasses.country
 WHERE population > 10000000
 GROUP BY country.name, sea, continent
-HAVING sea IS NULL AND continent = 'Asia'
+HAVING sea IS NULL AND continent = 'Asia';
 
 ### 24. List the capitals of countries where the population of the capital is more than half the population of the country.
 
@@ -219,7 +219,7 @@ FROM citypops
 LEFT JOIN country
 ON citypops.country = country.code
 WHERE citypops.city = country.capital
-  AND (citypops.population > (country.population / 2))
+  AND (citypops.population > (country.population / 2));
 
 ### 25. Show country pairs that share a border and both have "Republic" in their name.
 
@@ -236,13 +236,13 @@ WHERE country1 IN (
   SELECT code 
   FROM country
   WHERE name LIKE '%Republic' OR name LIKE '%Rep%'
-)
+);
 
 ### 26. Which river flows through the most countries?
 
 SELECT river, COUNT(DISTINCT country) FROM geo_river
 GROUP BY river
-ORDER BY count DESC
+ORDER BY count DESC;
 
 ### 27. Show the average area of countries by continent, sorted descending.
 
@@ -251,7 +251,35 @@ FROM encompasses
 JOIN country
 ON encompasses.country = country.code
 GROUP BY encompasses.continent
-ORDER BY SUM(country.area) DESC
+ORDER BY SUM(country.area) DESC;
 
 ### 28. Find all cities that are capitals and also the largest city in their country.
 
+WITH CityRanking AS (
+  SELECT name, country, population,
+    ROW_NUMBER() OVER (PARTITION BY country
+    ORDER BY population DESC) AS rn
+  FROM city
+)
+
+SELECT country.name AS country, CityRanking.name AS city, CityRanking.population
+FROM CityRanking
+JOIN country
+ON CityRanking.country = country.code
+WHERE CityRanking.rn = 1 AND CityRanking.population IS NOT NULL AND CityRanking.name = country.capital;
+
+### 29. List countries whose capital name starts with the same letter as the country.
+
+SELECT name, capital FROM country
+WHERE LEFT(name, 1) = LEFT(capital, 1);
+
+### 30. Find the smallest country (by area) that has more than 3 official languages.
+
+SELECT country.name, COUNT(*) AS languages, country.area
+FROM spoken
+LEFT JOIN country
+ON spoken.country = country.code
+GROUP BY country.name, spoken.country, country.area
+HAVING COUNT(*) >= 3
+ORDER BY country.area ASC
+LIMIT 1;
