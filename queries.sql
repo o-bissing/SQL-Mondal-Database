@@ -153,7 +153,8 @@ WHERE geo_river.river = (
 
 SELECT name, (population / area)
 FROM country
-ORDER BY (population / area) DESC;
+ORDER BY (population / area) DESC
+LIMIT 1;
 
 ### 19. List all countries where Islam is the dominant religion and population exceeds 100 million.
 
@@ -246,12 +247,12 @@ ORDER BY count DESC;
 
 ### 27. Show the average area of countries by continent, sorted descending.
 
-SELECT encompasses.continent, SUM(country.area) 
+SELECT encompasses.continent, AVG(country.area) 
 FROM encompasses
 JOIN country
 ON encompasses.country = country.code
 GROUP BY encompasses.continent
-ORDER BY SUM(country.area) DESC;
+ORDER BY AVG(country.area) DESC;
 
 ### 28. Find all cities that are capitals and also the largest city in their country.
 
