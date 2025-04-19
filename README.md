@@ -74,7 +74,7 @@ Mondial Database has been generated in 1998 at Freiburg University, and since 20
 
 ## 30 questions to answer
 
-I asked ChatGPT to create 30 questions about this data, which I then answered using SQL. There are 3 categories of questions: Beginner, Intermediate and Advanced. Full list of the questions: ![Questions](https://github.com/o-bissing/SQL-Mondial-Database/blob/main/questions.md). All corresponding SQL queries I came up with: ![Answers](https://github.com/o-bissing/SQL-Mondial-Database/blob/main/queries.sql).
+I asked ChatGPT to create 30 questions about this data, which I then answered using SQL. There are 3 categories of questions: Beginner, Intermediate and Advanced. Full list of the questions: [Questions](https://github.com/o-bissing/SQL-Mondial-Database/blob/main/questions.md). All corresponding SQL queries I came up with: [Answers](https://github.com/o-bissing/SQL-Mondial-Database/blob/main/queries.sql).
 
 Examples of questions and corresponding SQL queries:
 
