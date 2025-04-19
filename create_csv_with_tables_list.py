@@ -1,9 +1,9 @@
 import csv
 
-# Path to your CSV file
+# Path to the CSV file
 csv_file_path = 'D:/SQL/SQL-Mondial-Database/tables_info.csv'
 
-# Path to your README file
+# Path to the README file
 readme_file_path = 'D:/SQL/SQL-Mondial-Database/README.md'
 
 # Read the CSV data
