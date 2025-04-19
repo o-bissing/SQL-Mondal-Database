@@ -15,6 +15,7 @@ To create this project I worked with the following tools/technologies:
 - **PostgreSQL** database for storing data
 - **pgAdmin** for managing the database
 - **JSON** file format for storing SQL-query output to use it later in Power BI
+- **DAX** to enchance Power BI report quality
 - **Git** for version control
 
 ## Database Tables and Columns
