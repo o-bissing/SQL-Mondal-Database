@@ -8,14 +8,13 @@ Goal of this project is to enchance my SQL and Power BI skills.
 
 To create this project I worked with the following tools/technologies:
 
-- **Python** as a main programming language
 - **SQL** as a main data language
+- **Power BI** to create a report
+- **Python** as a main programming language
 - **ChatGPT** to create questions to the database which I then answered using SQL
 - **PostgreSQL** database for storing data
 - **pgAdmin** for managing the database
-- **Power BI** to create a report
 - **JSON** file format for storing SQL-query output to use it later in Power BI
-- **Bash** for interaction with OS, doing terminal based tasks and working with GitHub
 - **Git** for version control
 
 ## Database Tables and Columns
